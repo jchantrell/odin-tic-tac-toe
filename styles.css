@@ -1,0 +1,26 @@
+body {
+    background: thistle;
+}
+
+.gameContainer {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px;
+    justify-content: center;
+    align-content: center;
+}
+
+.cell {
+    background: #FCFCFC;
+    font-size: 4em;
+    display: flex;
+    height: 200px;
+    width: 200px;
+    border: black solid 1px;
+}
+
+.gameContainer, .cell {
+    align-items: center;
+    justify-content: center;
+}
