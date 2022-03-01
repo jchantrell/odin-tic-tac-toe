@@ -6,13 +6,14 @@ const player = (() => {
     const playerMoveListener = (() => {
         document.body.addEventListener('click', function(event){
             if(event.target.classList.contains('cell')) {
-                move()
+                cell = event.target.id
+                move(cell)
             };
           });
     })();
 
     const move = () => {
-        Controller.playerMove()
+        Controller.playerMove(cell)
     }
 
 })();
@@ -29,23 +30,22 @@ const Controller = (() => {
           }, false);
     })();
       
-    const playerMove = () => {
-
+    const playerMove = (cell) => {
+`
         // check if the move is valid
         // REWRITE THIS TO CHECK ARRAY, NOT HTML
         if (event.target.textContent == ""){
              currentMove.isValid = true;
-        }
+        }`
 
-        if (currentMove.isValid == true){
+        if (currentMove(cell).valid == true){
 
             // player one
             if (currentTurn.playerOne == true) {
                 event.target.textContent = "X";
+                gameboard.splice(event.target.id, 1, 'X')
                 currentTurn.playerOne = false;
                 currentTurn.playerTwo = true;
-                currentMove.isValid = false;
-                gameboard.splice(event.target.id, 1, 'X')
                 gameStatus()
             }
 
@@ -54,7 +54,7 @@ const Controller = (() => {
                 event.target.textContent = "O";
                 currentTurn.playerTwo = false;
                 currentTurn.playerOne = true;
-                currentMove.isValid = false;
+                currentMove.valid = false;
                 gameboard.splice(event.target.id, 1, 'O')
                 gameStatus()
             }
@@ -76,10 +76,13 @@ const Controller = (() => {
     }
 
     // rewrite this jank
-    const currentMove = () => {
-        let isValid = false;
+    const currentMove = (cell) => {
+        let valid = false;
+        if (gameboard[cell] == null) {
+            valid = true;
+        }
         return {
-            isValid
+            valid
         }
     }
 
