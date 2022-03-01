@@ -17,7 +17,7 @@ body {
     display: flex;
     height: 200px;
     width: 200px;
-    border: black solid 1px;
+    border: black solid 3px;
 }
 
 .gameContainer, .cell {
