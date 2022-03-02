@@ -1,16 +1,18 @@
-// player factory
-
 const player = (mark) => {
-    return mark;
+
+    return {
+        mark,
+        playerMoveListener
+    }
 }
 
 const Controller = (() => {
 
+    // listen for clicks on menu
     const menuListener = (() => {
         document.body.addEventListener('click', function(event){
             if(event.target.classList.contains('restart')) {
                 gameRestart()
-                console.log('restart')
             };
             if(event.target.classList.contains('home')) {
                 gameStart()
@@ -37,18 +39,17 @@ const Controller = (() => {
             };
           });
     })();
-      
+    
+    // handle moves for each player
     const playerMove = (cell) => {
-
         if (currentMove(cell).valid == true){
-
             // player one
             if (currentTurn.playerOne == true) {
                 cell.textContent = "X";
                 gameboard.splice(cell.id, 1, 'X')
                 currentTurn.playerOne = false;
                 currentTurn.playerTwo = true;
-                checkForWin()
+                checkForOutcome()
             }
 
             // player two
@@ -58,7 +59,7 @@ const Controller = (() => {
                 currentTurn.playerTwo = false;
                 currentTurn.playerOne = true;
                 currentMove.valid = false;
-                checkForWin()
+                checkForOutcome()
             }
         }
         else return;
@@ -83,19 +84,22 @@ const Controller = (() => {
         }
     }
 
+    // all possible outcomes hardcoded- there's a more elegant solution with loops that can scale relative to grid size but I am not smart enough for that yet 
     const possibleOutcomes = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
-    const checkForWin = () => {   
+    const checkForOutcome = () => {   
         for (outcome of possibleOutcomes){
             x = gameboard[outcome[0]];
             y = gameboard[outcome[1]];
             z = gameboard[outcome[2]];
+            // handle player one win
             if (x == 'X' && y == 'X' && z == 'X'){
                 colour = 'playerOneColour'
                 highlightWinningCombination(outcome, colour)
                 updateScoreboard('X');
                 gameEnd()
             }
+            // handle player two win
             if (x == 'O' && y == 'O' && z == 'O'){
                 colour = 'playerTwoColour'
                 highlightWinningCombination(outcome, colour)
@@ -103,8 +107,15 @@ const Controller = (() => {
                 gameEnd()
             }
         }
+
+        // handle draws
+        if (gameboard[0] && gameboard[1] && gameboard[2] && gameboard[3] && gameboard[4] && gameboard[5] && gameboard[6] && gameboard[7] && gameboard[8] !== null){
+            gameEnd()
+            updateScoreboard('D')
+        }
     }
 
+    // highlighting for winning combination
     const highlightWinningCombination = (outcome) => {
         document.getElementById(outcome[0]).classList.toggle(colour)
         document.getElementById(outcome[1]).classList.toggle(colour)
@@ -118,8 +129,8 @@ const Controller = (() => {
         // after prompts, set current turn to player 1
     }
 
+    // visually clean up and call gameStart() to start over
     const gameRestart = () => {
-        gameboard = [null, null, null, null, null, null, null, null, null];
         cells = document.querySelectorAll('.cell')
         cells.forEach (cell => {
             cell.innerText = '';
@@ -128,11 +139,14 @@ const Controller = (() => {
         gameStart();
     }
 
+    // clear data once game ends
     const gameEnd = () => {
+        gameboard = [null, null, null, null, null, null, null, null, null];
         currentTurn.playerOne = false;
         currentTurn.playerTwo = false;
     }
 
+    // update scoreboard with outcomes
     const updateScoreboard = (outcome) => {
         playerOne = document.querySelector('.playerOneScore');
         playerTwo = document.querySelector('.playerTwoScore');
