@@ -20,6 +20,18 @@ const player = (() => {
 
 const Controller = (() => {
 
+    const menuListener = (() => {
+        document.body.addEventListener('click', function(event){
+            if(event.target.classList.contains('restart')) {
+                gameRestart()
+                console.log('restart')
+            };
+            if(event.target.classList.contains('home')) {
+                gameStart()
+            };
+          });
+    })();
+
     // create array of 9 empty elements to represent gameboard
     let gameboard = [null, null, null, null, null, null, null, null, null];
 
@@ -61,7 +73,12 @@ const Controller = (() => {
     }
 
     const gameRestart = () => {
-        gameboard = [null, null, null, null, null, null, null, null, null]
+        gameboard = [null, null, null, null, null, null, null, null, null];
+        cells = document.querySelectorAll('.cell')
+        cells.forEach (cell => {
+            cell.innerText = '';
+        });
+        gameStart();
     }
 
     const currentTurn = () => {
@@ -69,7 +86,6 @@ const Controller = (() => {
         playerTwo = false;
     }
 
-    // rewrite this jank
     const currentMove = (cell) => {
         let valid = false;
         if (gameboard[cell.id] == null) {
@@ -129,14 +145,19 @@ const Controller = (() => {
     }
 
     const gameOutcome = (outcome) => {
+
+        playerOne = document.querySelector('.playerOneScore');
+        playerTwo = document.querySelector('.playerTwoScore');
+        ties = document.querySelector('.tiesAmount');
+
         if (outcome == 'X') {
-            console.log('player one wins')
+            playerOne.innerText = parseInt(playerOne.innerText) + 1;
         }
         else if (outcome == 'O') {
-            console.log('player two wins')
+            playerTwo.innerText = parseInt(playerTwo.innerText) + 1;
         }
         else if (outcome == 'D') {
-            console.log('draw')
+            ties.innerText = parseInt(ties.innerText) + 1;
         }
         currentTurn.playerOne = false;
         currentTurn.playerTwo = false;
