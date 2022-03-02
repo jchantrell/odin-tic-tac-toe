@@ -9,17 +9,39 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div class="main">
 
-    <div class="gameContainer">
-        <div id="0" class="cell"></div>
-        <div id="1" class="cell"></div>
-        <div id="2" class="cell"></div>
-        <div id="3" class="cell"></div>
-        <div id="4" class="cell"></div>
-        <div id="5" class="cell"></div>
-        <div id="6" class="cell"></div>
-        <div id="7" class="cell"></div>
-        <div id="8" class="cell"></div>
+        <div class="scoreboard">
+            <div class="playerOne currentTurn">
+                <div class="playerOneSymbol">X</div>
+                <div class="playerOneScore">0</div>
+            </div>
+            <div class="ties">
+                <div class="tiesTitle">Ties</div>
+                <div class="tiesAmount">0</div>
+            </div>
+            <div class="playerTwo">
+                <div class="playerTwoScore">0</div>
+                <div class="playerTwoSymbol">O</div>
+            </div>
+        </div>
+        <div class="gameContainer">
+            <div id="0" class="cell"></div>
+            <div id="1" class="cell"></div>
+            <div id="2" class="cell"></div>
+            <div id="3" class="cell"></div>
+            <div id="4" class="cell"></div>
+            <div id="5" class="cell"></div>
+            <div id="6" class="cell"></div>
+            <div id="7" class="cell"></div>
+            <div id="8" class="cell"></div>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><input type="image" src="icons/home-outline.png"class="restart" alt="Home"></button></li>
+                <li><input type="image" src="icons/restart.png"class="restart" alt="Restart"></button></li>
+            </ul>
+        </nav>
     </div>
     
 </body>
