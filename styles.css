@@ -2,6 +2,12 @@
 
 body {
     background: #e5e5e5;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
 }
 
 ul {
@@ -42,6 +48,16 @@ ul {
     height: 100px;
     margin-bottom: 40px;
     gap: 15px;
+}
+
+.pop {
+    animation: pop 0.3s ease-in-out;
+}
+
+@keyframes pop{
+    50%  {
+      transform: scale(1.4);
+    }
 }
 
 .playerOne, .playerTwo, .ties {
@@ -123,7 +139,6 @@ ul {
 .tiesAmount {
     grid-row: 2fr;
 }
-
 
 .currentTurn {
     box-shadow: 0 0 10px 3px black;

@@ -84,7 +84,7 @@ const Controller = (() => {
         }
     }
 
-    // all possible outcomes hardcoded- there's a more elegant solution with loops that can scale relative to grid size but I am not smart enough for that yet 
+    // all possible outcomes hardcoded - there's a more elegant solution with loops that can scale relative to grid size but I am not smart enough for that yet 
     const possibleOutcomes = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
     const checkForOutcome = () => {   
@@ -153,13 +153,26 @@ const Controller = (() => {
         ties = document.querySelector('.tiesAmount');
 
         if (outcome == 'X') {
-            playerOne.innerText = parseInt(playerOne.innerText) + 1;
+            playerOne.innerText = parseInt(playerOne.innerText) + 1
+            playerOne.classList.add('pop');
+            playerOne.addEventListener('animationend', function (){
+                playerOne.classList.remove('pop');
+            }, {once: true})
         }
+
         else if (outcome == 'O') {
             playerTwo.innerText = parseInt(playerTwo.innerText) + 1;
+            playerTwo.classList.add('pop');
+            playerTwo.addEventListener('animationend', function (){
+                playerTwo.classList.remove('pop');
+            }, {once: true})
         }
         else if (outcome == 'D') {
             ties.innerText = parseInt(ties.innerText) + 1;
+            ties.classList.add('pop');
+            ties.addEventListener('animationend', function (){
+                ties.classList.remove('pop');
+            }, {once: true})
         }
     }
 
