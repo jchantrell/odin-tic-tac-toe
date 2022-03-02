@@ -37,16 +37,18 @@ ul {
     display: grid;
     align-content: center;
     grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 1fr 2fr;
     width: 600px;
     height: 100px;
     margin-bottom: 40px;
-    gap: 25px;
+    gap: 15px;
 }
 
 .playerOne, .playerTwo, .ties {
     background: white;
     justify-content: center;
     border-radius: 15px;
+    grid-row: 2fr;
 }
 
 .playerOne, .playerTwo {
@@ -63,6 +65,26 @@ ul {
 
 .playerTwo {
     grid-column: 3 / 4;
+}
+
+.playerOneName, .playerTwoName {
+    font-size: 2em;
+}
+
+.playerOneName {
+    margin-left: 10px;
+    grid-column: 1 / 2;
+    grid-row: 1 / 1;
+    display: grid;
+    justify-content: flex-start;
+}
+
+.playerTwoName {
+    margin-right: 10px;
+    grid-column: 3 / 4;
+    grid-row: 1 / 1;
+    display: grid;
+    justify-content: flex-end;
 }
 
 .playerOneSymbol {
