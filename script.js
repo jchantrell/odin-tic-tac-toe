@@ -68,15 +68,6 @@ const Controller = (() => {
 
     }
 
-    const gameRestart = () => {
-        gameboard = [null, null, null, null, null, null, null, null, null];
-        cells = document.querySelectorAll('.cell')
-        cells.forEach (cell => {
-            cell.innerText = '';
-        });
-        gameStart();
-    }
-
     const currentTurn = () => {
         playerOne = false;
         playerTwo = false;
@@ -100,20 +91,24 @@ const Controller = (() => {
             y = gameboard[outcome[1]];
             z = gameboard[outcome[2]];
             if (x == 'X' && y == 'X' && z == 'X'){
-                highlightWinningCombination(x, y, z)
+                colour = 'playerOneColour'
+                highlightWinningCombination(outcome, colour)
                 updateScoreboard('X');
                 gameEnd()
             }
             if (x == 'O' && y == 'O' && z == 'O'){
-                highlightWinningCombination(x, y, z)
+                colour = 'playerTwoColour'
+                highlightWinningCombination(outcome, colour)
                 updateScoreboard('O');
                 gameEnd()
             }
         }
     }
 
-    const highlightWinningCombination = (x, y, z) => {
-        console.log(x, y, z)
+    const highlightWinningCombination = (outcome) => {
+        document.getElementById(outcome[0]).classList.toggle(colour)
+        document.getElementById(outcome[1]).classList.toggle(colour)
+        document.getElementById(outcome[2]).classList.toggle(colour)
     }
 
     const gameStart = () => {
@@ -121,6 +116,16 @@ const Controller = (() => {
         // prompt for name
         // prompt for vs player or PC
         // after prompts, set current turn to player 1
+    }
+
+    const gameRestart = () => {
+        gameboard = [null, null, null, null, null, null, null, null, null];
+        cells = document.querySelectorAll('.cell')
+        cells.forEach (cell => {
+            cell.innerText = '';
+            cell.classList.remove('playerOneColour', 'playerTwoColour')
+        });
+        gameStart();
     }
 
     const gameEnd = () => {
@@ -145,9 +150,7 @@ const Controller = (() => {
     }
 
     return {
-        playerMove,
-        checkForWin,
-        gameboard
+        playerMove
     }
 })();
 
