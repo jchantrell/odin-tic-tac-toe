@@ -87,11 +87,11 @@ ul {
     justify-content: flex-end;
 }
 
-.playerOneSymbol {
+.playerOneColour {
     color: #ea580c;
 }
 
-.playerTwoSymbol {
+.playerTwoColour {
     color: #3b82f6;
 }
 
