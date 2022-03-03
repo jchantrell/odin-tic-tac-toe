@@ -37,8 +37,14 @@ const Controller = (() => {
         createPlayerTwo(playerTwoNameForm)
 
         let difficulty = document.activeElement.getAttribute('value')
-        createBot(difficulty)
-        playGameVsBot(difficulty)
+
+        if (difficulty != null){
+            createBot(difficulty);
+            playGameVsBot(difficulty);
+        }
+        else if (difficulty == null){
+            playGameVsPlayer();
+        }
     })
     });
 
@@ -49,10 +55,9 @@ const Controller = (() => {
                     cell = event.target;
                     Controller.playerMove(cell);
                 }
-                else if (vsBot == false && currentTurn.playerOne == true){
-                    cell2 = event.target;
-                    Controller.playerMove(cell2);
-                    console.log('?')
+                else if (vsBot == false){
+                    cell = event.target;
+                    Controller.playerMove(cell);
                 }
             };
           });
@@ -157,6 +162,11 @@ const Controller = (() => {
         playerTwo = player(playerTwoNameForm, 'O');
     }
 
+    const playGameVsPlayer = () => {
+        goGame();
+        gameStart();
+    }
+
     // utility function that helps simulate human reaction time
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -249,7 +259,7 @@ const Controller = (() => {
             else if (currentTurn.playerTwo == true) {
                 cell.textContent = "O";
                 gameboard.splice(cell.id, 1, 'O');
-                hightlightPlayerOne();
+                highlightPlayerOne();
                 currentTurn.playerTwo = false;
                 currentTurn.playerOne = true;
                 currentMove.valid = false;
@@ -334,6 +344,9 @@ const Controller = (() => {
 
     // clear data once game ends
     const gameEnd = () => {
+        normalBotLoaded = false;
+        insaneBotLoaded = false;
+        vsBot = false;
         currentTurn.playerOne = false;
         currentTurn.playerTwo = false;
         gameboard.fill(null, 0, 9)
