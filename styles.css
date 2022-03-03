@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: #e5e5e5;
     -webkit-touch-callout: none; 
     -webkit-user-select: none; 
@@ -8,6 +9,9 @@ body {
     -moz-user-select: none;
     -ms-user-select: none; 
     user-select: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
 }
 
 ul {
@@ -16,37 +20,149 @@ ul {
 }
 
 .main {
+    position: relative;
     height: 100vh;
     display: grid;
     justify-content: center;
     align-content: center;
 }
 
-.menu {
+.home .options {
+    width: 600px;
+    height: 600px;
+}
+
+/* LANDING PAGE */
+
+.home {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr;
+    justify-content: center;
+    align-content: center;
+
+}
+.home .title {
+    margin-bottom: 100px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    font-size: 4em;
+}
+
+.playerChoice, .playerChoiceDescription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.playerChoiceDescription {
+    height: 50px;
+}
+
+.playerChoice img {
+    height: 50px;
+    width: 50px;
+}
+
+/* OPTIONS */
+
+.options {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.options .backToHome {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.options .backToHome input {
+    height: 30px;
+}
+
+.options playerNameContainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.options .enterSecondPlayerName {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.options .botDifficulty {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.options button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.options .title, .playerOrComputer {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.options input[type='text']{
+    text-align: center;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 15px;
+    border: none;
+    margin: 0;
+    background-color: #FCFCFC;
+    margin-bottom: 100px;
+    outline: none;
+}
+
+.options .twoPlayerButton {
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 25px;
+    width: 200px;
+    height: 50px;
+    background-color: #ea580c;
+    color: white;
+
+}
+
+/* GAME */
+
+.gameMenu {
     margin-top: 40px;
 }
 
-.menu ul {
+.gameMenu ul {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
-.menu button {
+.gameMenu button {
     height: 30px;
     width: 150px;
     border-radius: 15px;
 }
 
 .scoreboard {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: grid;
     align-content: center;
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: 1fr 2fr;
     width: 600px;
     height: 100px;
-    margin-bottom: 40px;
+    margin-bottom: 80px;
     gap: 15px;
 }
 
@@ -108,7 +224,7 @@ ul {
 }
 
 .playerTwoColour {
-    color: #3b82f6;
+    color: #22c55e;
 }
 
 .playerOneSymbol, .playerTwoSymbol {
@@ -141,7 +257,7 @@ ul {
 }
 
 .currentTurn {
-    box-shadow: 0 0 10px 3px black;
+    box-shadow: 5px 5px 5px black;
 }
 
 .gameContainer {
@@ -151,15 +267,37 @@ ul {
 }
 
 .cell {
-    background: #FCFCFC;
     font-size: 4em;
     display: flex;
     height: 200px;
     width: 200px;
-    border: black solid 3px;
 }
 
 .gameContainer, .cell {
     align-items: center;
     justify-content: center;
+}
+
+.shown {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.rightBorder {
+    border-right: 1px solid black;
+}
+
+.leftBorder {
+    border-left: 1px solid black;
+}
+
+.topBorder {
+    border-top: 1px solid black;
+}
+
+.bottomBorder {
+    border-bottom: 1px solid black;
 }

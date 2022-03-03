@@ -11,41 +11,93 @@
 <body>
     <div class="main">
 
-        <div class="scoreboard">
-            <div class="playerOneName">Joel</div>
-            <div class="playerOne">
-                <div class="playerOneSymbol playerOneColour">X</div>
-                <div class="playerOneScore">0</div>
-            </div>
-            <div class="ties">
-                <div class="tiesTitle">Ties</div>
-                <div class="tiesAmount">0</div>
-            </div>
-            <div class="playerTwoName">Computer</div>
-            <div class="playerTwo">
-                <div class="playerTwoScore">0</div>
-                <div class="playerTwoSymbol playerTwoColour">O</div>
-            </div>
+        <div class="home shown">
+
+            <div class="title">TIC TAC TOE</div>
+
+            <div class="playerChoiceWrapper">
+
+                <div class="playerChoiceDescription">1 or 2 Players?</div>
+                <div class="playerChoice">
+                    <input type="image" class="onePlayer" src="icons/account.png" alt="">  
+                    <input type="image" class="twoPlayer" src="icons/account-multiple.png" alt="">
+                </div>
+
+            </div>     
         </div>
 
-        <div class="gameContainer">
-            <div id="0" class="cell"></div>
-            <div id="1" class="cell"></div>
-            <div id="2" class="cell"></div>
-            <div id="3" class="cell"></div>
-            <div id="4" class="cell"></div>
-            <div id="5" class="cell"></div>
-            <div id="6" class="cell"></div>
-            <div id="7" class="cell"></div>
-            <div id="8" class="cell"></div>
+        <div class="options hidden">
+            <div class="backToHome">
+                <input type="image" class="goHome" src="icons/arrow-left.png" alt="Back">
+            </div>
+            <div class="title">Enter name</div>
+            <form action="" method="" id="playerForm">
+                <div class="playeNameContainer">
+                    <input name="playerOneNameInput" class="playerOneNameInput" type="text">
+                    <div class="enterSecondPlayerName">Enter second player name</div>
+                    <input name="playerTwoNameInput" class="playerTwoNameInput hidden" type="text">
+                </div>
+                <div class="playerOrComputer"></div>
+                <div class="botDifficulty">
+
+                    <button class="normalDifficulty hidden" type="submit" name="normalDifficulty" value="normal">
+                        <img src="icons/robot-excited.png" />
+                    </button>
+
+                    <button class="impossibleDifficulty hidden" type="submit" name="impossibleDifficulty" value="impossible">
+                        <img src="icons/robot-angry.png" />
+                    </button>
+
+                </div>
+                <button class="twoPlayerButton" type="submit">Play</button>
+            </form>
         </div>
 
-        <nav class="menu">
-            <ul>
-                <li><input type="image" src="icons/dots-horizontal.png" class="home" alt="Menu"></button></li>
-                <li><input type="image" src="icons/restart.png"class="restart" alt="Restart"></button></li>
-            </ul>
-        </nav>
+        <div class="game hidden">
+
+            <div class="scoreboard">
+
+                <div class="playerOneName">Joel</div>
+                <div class="playerOne">
+                    <div class="playerOneSymbol playerOneColour">X</div>
+                    <div class="playerOneScore">0</div>
+                </div>
+
+                <div class="ties">
+                    <div class="tiesTitle">Ties</div>
+                    <div class="tiesAmount">0</div>
+                </div>
+
+                <div class="playerTwoName">Computer</div>
+                <div class="playerTwo">
+                    <div class="playerTwoScore">0</div>
+                    <div class="playerTwoSymbol playerTwoColour">O</div>
+                </div>
+
+            </div>
+
+            <div class="gameContainer">
+                <div id="0" class="cell bottomBorder"></div>
+                <div id="1" class="cell bottomBorder leftBorder rightBorder"></div>
+                <div id="2" class="cell bottomBorder"></div>
+                <div id="3" class="cell bottomBorder"></div>
+                <div id="4" class="cell bottomBorder leftBorder rightBorder"></div>
+                <div id="5" class="cell bottomBorder"></div>
+                <div id="6" class="cell"></div>
+                <div id="7" class="cell leftBorder rightBorder"></div>
+                <div id="8" class="cell"></div>
+            </div>
+
+            <nav class="gameMenu">
+                <ul>
+
+                    <li><input type="image" src="icons/home-outline.png" class="home" alt="Menu"></button></li>
+
+                    <li><input type="image" src="icons/restart.png"class="restart" alt="Restart"></button></li>
+
+                </ul>
+            </nav>
+        </div>
     </div>
     
 </body>

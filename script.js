@@ -1,24 +1,225 @@
-const player = (mark) => {
+const player = (name, mark) => {
+
+    const playing = false;  
 
     return {
-        mark,
-        playerMoveListener
+        name,
+        mark
     }
 }
 
 const Controller = (() => {
 
-    // listen for clicks on menu
-    const menuListener = (() => {
+    const home = document.querySelector('.home');
+    const options = document.querySelector('.options');
+    const game = document.querySelector('.game');
+    const form = document.getElementById('playerForm'); 
+    const formDescription = document.querySelector('.playerOrComputer')
+    const normalBot = document.querySelector('.normalDifficulty');
+    const impossibleBot = document.querySelector('.impossibleDifficulty');
+    const secondPlayerNameInput = document.querySelector('.playerTwoNameInput');
+    const secondPlayerDescription = document.querySelector('.enterSecondPlayerName');
+    const secondPlayerButton = document.querySelector('.twoPlayerButton');
+    let playerOneName = document.querySelector('.playerOneName');
+    let playerTwoName = document.querySelector('.playerTwoName');
+    let playerOne = null;
+    let playerTwo = null;
+
+    // listener for form
+    window.addEventListener("load", function() {
+    document.getElementById('playerForm').addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let playerOneNameForm = form.playerOneNameInput.value
+        createPlayerOne(playerOneNameForm)
+
+        let playerTwoNameForm = form.playerTwoNameInput.value
+        createPlayerTwo(playerTwoNameForm)
+
+        let difficulty = document.activeElement.getAttribute('value')
+        createBot(difficulty)
+        playGameVsBot(difficulty)
+    })
+    });
+
+    const playerMoveListener = (() => {
+        document.body.addEventListener('click', function(event){
+            if(event.target.classList.contains('cell')) {
+                if (vsBot == true && currentTurn.playerOne == true){
+                    cell = event.target;
+                    Controller.playerMove(cell);
+                }
+                else if (vsBot == false && currentTurn.playerOne == true){
+                    cell2 = event.target;
+                    Controller.playerMove(cell2);
+                    console.log('?')
+                }
+            };
+          });
+    })();
+
+    // listen for clicks on certain amounts
+    const clickListener = (() => {
         document.body.addEventListener('click', function(event){
             if(event.target.classList.contains('restart')) {
                 gameRestart()
             };
             if(event.target.classList.contains('home')) {
-                gameStart()
+                goHome();
+            };
+            if(event.target.classList.contains('goHome')) {
+                goHome();
+            };
+            if(event.target.classList.contains('onePlayer')) {
+                onePlayerOptions();
+            };
+            if(event.target.classList.contains('twoPlayer')) {
+                twoPlayerOptions();
             };
           });
     })();
+
+    // handle menu functions
+    const goHome = () => {
+        game.classList.add('hidden');
+        game.classList.remove('shown');
+        options.classList.add('hidden');
+        options.classList.remove('shown');
+        home.classList.add('shown');
+        home.classList.remove('hidden');
+        gameRestart();
+        gameEnd();
+    }
+
+    const goOptions = (numOfPlayers) => {
+        game.classList.add('hidden');
+        game.classList.remove('shown');
+        options.classList.add('shown');
+        options.classList.remove('hidden');
+        home.classList.add('hidden');
+        home.classList.remove('shown');
+        gameRestart();
+        gameEnd();
+
+        if (numOfPlayers == "one"){
+            impossibleBot.classList.add('shown');
+            impossibleBot.classList.remove('hidden');
+            normalBot.classList.add('shown');
+            normalBot.classList.remove('hidden');
+            secondPlayerNameInput.classList.add('hidden');
+            secondPlayerNameInput.classList.remove('shown');
+            secondPlayerDescription.classList.add('hidden');
+            secondPlayerDescription.classList.remove('shown');
+            secondPlayerButton.classList.add('hidden');
+            secondPlayerButton.classList.remove('shown');
+            formDescription.textContent = 'Choose difficulty..';
+
+        }
+        else if (numOfPlayers == "two"){
+            impossibleBot.classList.add('hidden');
+            impossibleBot.classList.remove('shown');
+            normalBot.classList.add('hidden');
+            normalBot.classList.remove('shown');
+            secondPlayerNameInput.classList.add('shown');
+            secondPlayerNameInput.classList.remove('hidden');
+            secondPlayerDescription.classList.add('shown');
+            secondPlayerDescription.classList.remove('hidden');
+            secondPlayerButton.classList.add('shown');
+            secondPlayerButton.classList.remove('hidden');
+            formDescription.textContent = '';
+        }
+    }
+
+    const goGame = () => {
+        game.classList.add('shown');
+        game.classList.remove('hidden');
+        options.classList.add('hidden');
+        options.classList.remove('shown');
+        home.classList.add('hidden');
+        home.classList.remove('shown');
+    }
+
+    const onePlayerOptions = () => {
+        goOptions("one")
+    }
+
+    const twoPlayerOptions = () => {
+        goOptions("two")
+    }
+
+    const createPlayerOne = (playerOneNameForm) => {
+        playerOneName.innerText = playerOneNameForm;
+        playerOne = player(playerOneNameForm, 'X');
+    }
+
+    const createPlayerTwo = (playerTwoNameForm) => {
+        playerTwoName.innerText = playerTwoNameForm;
+        playerTwo = player(playerTwoNameForm, 'O');
+    }
+
+    // utility function that helps simulate human reaction time
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    const playGameVsBot = (difficulty) => {
+        if (difficulty == 'normal'){
+            document.querySelector('.playerTwoName').innerText = playerTwo.name;
+            normalBotLoaded = true;
+            vsBot = true;
+            gameStart();;
+        }
+        
+        else if (difficulty == 'impossible'){
+            document.querySelector('.playerTwoName').innerText = playerTwo.name;
+            insaneBotLoaded = true;
+            vsBot = true;
+            gameStart();
+        }
+        goGame();
+    }
+
+    const createBot = (difficulty) => {
+        if (difficulty == 'normal'){
+            playerTwo = player("Normal bot", 'O');
+        }
+        else if (difficulty == 'impossible'){
+            playerTwo = player("Impossible bot", 'O');
+        }
+    }
+
+    let normalBotLoaded = false;
+    let insaneBotLoaded = false;
+    let vsBot = false;
+
+    const normalBotPlay = async () => {
+        if (currentTurn.playerTwo == true){
+            let pickCell = Math.floor(Math.random() * 9)
+            if (gameboard[pickCell] != null) {
+                normalBotPlay();
+            }
+            else if (gameboard[pickCell] == null){
+                await delay(1000);
+                document.getElementById(pickCell).textContent = '0'
+                gameboard.splice(pickCell, 1, 'O');
+                currentTurn.playerTwo = false;
+                currentTurn.playerOne = true;
+                checkForOutcome();
+                highlightPlayerOne();
+            }
+    }} 
+
+    const insaneBotPlay = () => {
+        if (currentTurn.playerTwo == true){
+            let pickCell = Math.floor(Math.random() * 10)
+    }}
+
+    const invokeBot = () => {
+        if (currentTurn.playerTwo == true && normalBotLoaded == true){
+            normalBotPlay();
+        }
+        else if (currentTurn.playerTwo == true && insaneBotLoaded == true){
+            insaneBotPlay();
+        }
+    }
 
     // create array of 9 empty elements to represent gameboard
     let gameboard = [null, null, null, null, null, null, null, null, null];
@@ -29,50 +230,41 @@ const Controller = (() => {
             gameStart()
           }, false);
     })();
-
-    // listens for clicks on each cell
-    const playerMoveListener = (() => {
-        document.body.addEventListener('click', function(event){
-            if(event.target.classList.contains('cell')) {
-                cell = event.target;
-                Controller.playerMove(cell);
-            };
-          });
-    })();
     
     // handle moves for each player
-    const playerMove = (cell) => {
+    const playerMove = (cell, mark) => {
         if (currentMove(cell).valid == true){
             // player one
             if (currentTurn.playerOne == true) {
                 cell.textContent = "X";
                 gameboard.splice(cell.id, 1, 'X')
+                highlightPlayerTwo();
                 currentTurn.playerOne = false;
                 currentTurn.playerTwo = true;
-                checkForOutcome()
+                checkForOutcome();
+                invokeBot();
             }
 
             // player two
             else if (currentTurn.playerTwo == true) {
                 cell.textContent = "O";
                 gameboard.splice(cell.id, 1, 'O');
+                hightlightPlayerOne();
                 currentTurn.playerTwo = false;
                 currentTurn.playerOne = true;
                 currentMove.valid = false;
-                checkForOutcome()
+                checkForOutcome();
             }
         }
         else return;
-    }
-
-    const displayNotification = () => {
-
     }
 
     const currentTurn = () => {
         playerOne = false;
         playerTwo = false;
     }
+
+  
 
     const currentMove = (cell) => {
         let valid = false;
@@ -92,6 +284,7 @@ const Controller = (() => {
             x = gameboard[outcome[0]];
             y = gameboard[outcome[1]];
             z = gameboard[outcome[2]];
+
             // handle player one win
             if (x == 'X' && y == 'X' && z == 'X'){
                 colour = 'playerOneColour'
@@ -99,8 +292,9 @@ const Controller = (() => {
                 updateScoreboard('X');
                 gameEnd()
             }
+
             // handle player two win
-            if (x == 'O' && y == 'O' && z == 'O'){
+            else if (x == 'O' && y == 'O' && z == 'O'){
                 colour = 'playerTwoColour'
                 highlightWinningCombination(outcome, colour)
                 updateScoreboard('O');
@@ -124,9 +318,7 @@ const Controller = (() => {
 
     const gameStart = () => {
         currentTurn.playerOne = true;
-        // prompt for name
-        // prompt for vs player or PC
-        // after prompts, set current turn to player 1
+        highlightPlayerOne();
     }
 
     // visually clean up and call gameStart() to start over
@@ -136,24 +328,46 @@ const Controller = (() => {
             cell.innerText = '';
             cell.classList.remove('playerOneColour', 'playerTwoColour')
         });
+        gameboard.fill(null, 0, 9);
         gameStart();
     }
 
     // clear data once game ends
     const gameEnd = () => {
-        gameboard = [null, null, null, null, null, null, null, null, null];
         currentTurn.playerOne = false;
         currentTurn.playerTwo = false;
+        gameboard.fill(null, 0, 9)
+        clearHighlights();
+    }
+
+    const clearHighlights = () => {
+        document.querySelector('.playerOne').classList.remove('currentTurn');
+        document.querySelector('.playerTwo').classList.remove('currentTurn');
+    }
+
+    const highlightPlayerOne = () => {
+        document.querySelector('.playerOne').classList.add('currentTurn');
+        document.querySelector('.playerTwo').classList.remove('currentTurn');
+    }
+
+    const highlightPlayerTwo = () => {
+        document.querySelector('.playerOne').classList.remove('currentTurn');
+        document.querySelector('.playerTwo').classList.add('currentTurn');
     }
 
     // update scoreboard with outcomes
     const updateScoreboard = (outcome) => {
+
+        let playerOneScoreData = "0";
+        let playerTwoScoreData = "0";
+        let tiesScoreData = "0";
+
         playerOne = document.querySelector('.playerOneScore');
         playerTwo = document.querySelector('.playerTwoScore');
         ties = document.querySelector('.tiesAmount');
 
         if (outcome == 'X') {
-            playerOne.innerText = parseInt(playerOne.innerText) + 1
+            playerOne.innerText = parseInt(playerOne.innerText) + 1;
             playerOne.classList.add('pop');
             playerOne.addEventListener('animationend', function (){
                 playerOne.classList.remove('pop');
@@ -177,10 +391,12 @@ const Controller = (() => {
     }
 
     return {
-        playerMove
+        playerMove,
+        currentTurn,
+        clearHighlights
     }
 })();
 
-
 // AI
 
+ 
