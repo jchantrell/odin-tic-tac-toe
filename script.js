@@ -342,12 +342,21 @@ const Controller = (() => {
         gameStart();
     }
 
-    // clear data once game ends
+    // restrict turns, clear internal data once game ends
     const gameEnd = () => {
         currentTurn.playerOne = false;
         currentTurn.playerTwo = false;
         gameboard.fill(null, 0, 9)
         clearHighlights();
+    }
+
+    const clearData = () => {
+        playerOneScoreData = 0;
+        document.querySelector('.playerOneScore').innerText = "0";
+        playerTwoScoreData = 0;
+        document.querySelector('.playerTwoScore').innerText = "0";
+        tiesScoreData = 0;
+        document.querySelector('.tiesScore').innerText = "0";
     }
 
     const clearHighlights = () => {
@@ -374,7 +383,7 @@ const Controller = (() => {
 
         playerOne = document.querySelector('.playerOneScore');
         playerTwo = document.querySelector('.playerTwoScore');
-        ties = document.querySelector('.tiesAmount');
+        ties = document.querySelector('.tiesScore');
 
         if (outcome == 'X') {
             playerOneScoreData ++;
