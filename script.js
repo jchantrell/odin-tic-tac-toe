@@ -30,6 +30,16 @@ const Controller = (() => {
     document.getElementById('playerForm').addEventListener("submit", function(e) {
         e.preventDefault();
 
+        if (form.playerOneNameInput.value == ""){
+            alert("Please enter a name.")
+            return
+        }
+
+        if (vsBot == false && form.playerTwoNameInput.value == ""){
+            alert("Please enter a name for player two")
+            return
+        }
+
         let playerOneNameForm = form.playerOneNameInput.value
         createPlayerOne(playerOneNameForm)
 
@@ -110,6 +120,7 @@ const Controller = (() => {
         gameEnd();
 
         if (numOfPlayers == "one"){
+            vsBot = true;
             impossibleBot.classList.add('shown');
             impossibleBot.classList.remove('hidden');
             normalBot.classList.add('shown');
@@ -124,6 +135,7 @@ const Controller = (() => {
 
         }
         else if (numOfPlayers == "two"){
+            vsBot = false;
             impossibleBot.classList.add('hidden');
             impossibleBot.classList.remove('shown');
             normalBot.classList.add('hidden');
