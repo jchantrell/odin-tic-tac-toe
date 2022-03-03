@@ -344,9 +344,6 @@ const Controller = (() => {
 
     // clear data once game ends
     const gameEnd = () => {
-        normalBotLoaded = false;
-        insaneBotLoaded = false;
-        vsBot = false;
         currentTurn.playerOne = false;
         currentTurn.playerTwo = false;
         gameboard.fill(null, 0, 9)
@@ -368,19 +365,20 @@ const Controller = (() => {
         document.querySelector('.playerTwo').classList.add('currentTurn');
     }
 
+    let playerOneScoreData = 0;
+    let playerTwoScoreData = 0;
+    let tiesScoreData = 0;
+
     // update scoreboard with outcomes
     const updateScoreboard = (outcome) => {
-
-        let playerOneScoreData = "0";
-        let playerTwoScoreData = "0";
-        let tiesScoreData = "0";
 
         playerOne = document.querySelector('.playerOneScore');
         playerTwo = document.querySelector('.playerTwoScore');
         ties = document.querySelector('.tiesAmount');
 
         if (outcome == 'X') {
-            playerOne.innerText = parseInt(playerOne.innerText) + 1;
+            playerOneScoreData ++;
+            playerOne.innerText = playerOneScoreData;
             playerOne.classList.add('pop');
             playerOne.addEventListener('animationend', function (){
                 playerOne.classList.remove('pop');
@@ -388,14 +386,16 @@ const Controller = (() => {
         }
 
         else if (outcome == 'O') {
-            playerTwo.innerText = parseInt(playerTwo.innerText) + 1;
+            playerTwoScoreData ++;
+            playerTwo.innerText = playerTwoScoreData;
             playerTwo.classList.add('pop');
             playerTwo.addEventListener('animationend', function (){
                 playerTwo.classList.remove('pop');
             }, {once: true})
         }
         else if (outcome == 'D') {
-            ties.innerText = parseInt(ties.innerText) + 1;
+            tiesScoreData ++;
+            ties.innerText = tiesScoreData;
             ties.classList.add('pop');
             ties.addEventListener('animationend', function (){
                 ties.classList.remove('pop');
