@@ -43,6 +43,9 @@ const Controller = (() => {
             playGameVsBot(difficulty);
         }
         else if (difficulty == null){
+            normalBotLoaded = false;
+            insaneBotLoaded = false;
+            vsBot = false;
             playGameVsPlayer();
         }
     })
