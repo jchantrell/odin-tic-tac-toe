@@ -32,8 +32,6 @@ ul {
     height: 600px;
 }
 
-/* LANDING PAGE */
-
 .home {
     display: grid;
     grid-template: 1fr 1fr / 1fr;
@@ -64,8 +62,6 @@ ul {
     height: 50px;
     width: 50px;
 }
-
-/* OPTIONS */
 
 .options {
     display: grid;
@@ -136,8 +132,6 @@ ul {
     color: white;
 
 }
-
-/* GAME */
 
 .gameMenu {
     margin-top: 40px;
