@@ -340,17 +340,17 @@ ul {
 }
 
 .rightBorder {
-    border-right: 1px solid black;
+    border-right: 5px solid black;
 }
 
 .leftBorder {
-    border-left: 1px solid black;
+    border-left: 5px solid black;
 }
 
 .topBorder {
-    border-top: 1px solid black;
+    border-top: 5px solid black;
 }
 
 .bottomBorder {
-    border-bottom: 1px solid black;
+    border-bottom: 5px solid black;
 }
