@@ -201,6 +201,7 @@ const Controller = (() => {
         if (difficulty == 'normal'){
             document.querySelector('.playerTwoName').innerText = playerTwo.name;
             normalBotLoaded = true;
+            insaneBotLoaded = false;
             vsBot = true;
             gameStart();;
         }
@@ -208,6 +209,7 @@ const Controller = (() => {
         else if (difficulty == 'impossible'){
             document.querySelector('.playerTwoName').innerText = playerTwo.name;
             insaneBotLoaded = true;
+            normalBotLoaded = false;
             vsBot = true;
             gameStart();
         }
@@ -246,7 +248,7 @@ const Controller = (() => {
 
     const insaneBotPlay = () => {
         if (currentTurn.playerTwo == true){
-            let pickCell = Math.floor(Math.random() * 10)
+            let pickCell = Math.floor(Math.random() * 9)
     }}
 
     const invokeBot = () => {
