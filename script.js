@@ -118,6 +118,7 @@ const Controller = (() => {
         home.classList.remove('hidden');
         gameRestart();
         gameEnd();
+        clearData();
     }
 
     const goOptions = (numOfPlayers) => {
