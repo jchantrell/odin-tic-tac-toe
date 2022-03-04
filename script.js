@@ -31,12 +31,12 @@ const Controller = (() => {
         e.preventDefault();
 
         if (form.playerOneNameInput.value == ""){
-            alert("Please enter a name.")
+            validateForm();
             return
         }
 
         if (vsBot == false && form.playerTwoNameInput.value == ""){
-            alert("Please enter a name for player two")
+            validateForm();
             return
         }
 
@@ -60,6 +60,17 @@ const Controller = (() => {
         }
     })
     });
+
+    const validateForm = () => {
+        if (form.playerOneNameInput.value == "") {
+            playerOneInput = document.querySelector('.playerOneNameInput');
+            playerOneInput.classList.add('shake');
+            playerOneInput.addEventListener('animationend', function (){
+                playerOneInput.classList.remove('shake');
+            }, {once: true})
+        }
+    }
+
 
     const playerMoveListener = (() => {
         document.body.addEventListener('click', function(event){
@@ -426,7 +437,6 @@ const Controller = (() => {
             }, {once: true})
         }
     }
-
     return {
         playerMove,
         currentTurn,
