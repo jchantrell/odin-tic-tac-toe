@@ -133,6 +133,10 @@ ul {
 
 }
 
+.game {
+    height: 100%;
+}
+
 .gameMenu {
     margin-top: 40px;
 }
@@ -147,12 +151,6 @@ ul {
     height: 30px;
     width: 150px;
     border-radius: 15px;
-}
-
-.gameMenu .home {
-    position: absolute;
-    top: 20px;   
-    left: 20px;
 }
 
 .scoreboard {
@@ -354,7 +352,12 @@ ul {
 
 @media only screen and (max-width: 60em){
     .scoreboard {
-        width: 350px;
+        width: 450px;
+    }
+
+    .gameContainer {
+        height: 450px;
+        width: 450px;
     }
 
     .cell {
@@ -368,17 +371,34 @@ ul {
     
  }
 
+ @media only screen and (max-width: 30em){
+    .scoreboard {
+        width: 300px;
+    }
+
+    .gameContainer {
+        height: 300px;
+        width: 300px;
+    }
+
+    .cell {
+        height: 100px;
+        width: 100px;
+    }
+ }
+
  @media only screen and (max-width: 20em){
     .scoreboard {
-        width: 270px;
+        width: 250px;
+    }
+
+    .gameContainer {
+        height: 240px;
+        width: 240px;
     }
 
     .cell {
         height: 80px;
+        width: 80px;
     }
-
-    .playerOneName, .playerTwoName{
-        display: none;
-    }
-    
  }
