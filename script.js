@@ -78,7 +78,6 @@ const Controller = (() => {
         }
     }
 
-
     const playerMoveListener = (() => {
         document.body.addEventListener('click', function(event){
             if(event.target.classList.contains('cell')) {
@@ -310,8 +309,6 @@ const Controller = (() => {
         playerTwo = false;
     }
 
-  
-
     const currentMove = (cell) => {
         let valid = false;
         if (gameboard[cell.id] == null) {
@@ -453,7 +450,3 @@ const Controller = (() => {
         clearHighlights
     }
 })();
-
-// AI
-
- 
