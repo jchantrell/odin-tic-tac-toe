@@ -385,6 +385,29 @@ ul {
         height: 100px;
         width: 100px;
     }
+
+    .playerOneName, .playerTwoName{
+        display: none;
+    }
+ }
+
+ @media only screen and (max-height: 1000px) {
+    .scoreboard {
+        width: 450px;
+    }
+
+    .gameContainer {
+        height: 450px;
+        width: 450px;
+    }
+
+    .cell {
+        height: 150px;
+        width: 150px;
+    }
+    .playerOneName, .playerTwoName{
+        display: none;
+    }
  }
 
  @media only screen and (max-width: 20em){
@@ -400,5 +423,8 @@ ul {
     .cell {
         height: 80px;
         width: 80px;
+    }
+    .playerOneName, .playerTwoName{
+        display: none;
     }
  }
