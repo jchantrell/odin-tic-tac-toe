@@ -69,6 +69,13 @@ const Controller = (() => {
                 playerOneInput.classList.remove('shake');
             }, {once: true})
         }
+        if (form.playerTwoNameInput.value == "") {
+            playerTwoInput = document.querySelector('.playerTwoNameInput');
+            playerTwoInput.classList.add('shake');
+            playerTwoInput.addEventListener('animationend', function (){
+                playerTwoInput.classList.remove('shake');
+            }, {once: true})
+        }
     }
 
 
