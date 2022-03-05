@@ -393,20 +393,38 @@ ul {
 
  @media only screen and (max-height: 1000px) {
     .scoreboard {
-        width: 450px;
+        width: 360px;
+        margin-bottom: 40px;
     }
 
     .gameContainer {
-        height: 450px;
-        width: 450px;
+        height: 360px;
+        width: 360px;
     }
 
     .cell {
-        height: 150px;
-        width: 150px;
+        height: 120px;
+        width: 120px;
     }
     .playerOneName, .playerTwoName{
         display: none;
+    }
+ }
+
+ @media only screen and (max-height: 650px) {
+    .scoreboard {
+        width: 300px;
+        margin-bottom: 40px;
+    }
+
+    .gameContainer {
+        height: 300px;
+        width: 300px;
+    }
+
+    .cell {
+        height: 100px;
+        width: 100px;
     }
  }
 
